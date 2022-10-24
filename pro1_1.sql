@@ -1,0 +1,1 @@
+insert into memberA values('keg','1234','고유진','keg@naver.com','010-1111-1111','2022-10-23');
