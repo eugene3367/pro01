@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, java.sql.*, java.text.*" %>
+<%@ page import="java.util.*, java.sql.*" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 	
 	String sid = (String) session.getAttribute("id");
+	
+	int no = Integer.parseInt(request.getParameter("no"));
+	String title = "";
+	String content = "";
+	String uname = "";
+	String resdate = "";
+	String author = "";
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -21,12 +28,27 @@
 		Class.forName("oracle.jdbc.OracleDriver");
 		con = DriverManager.getConnection(url, dbid, dbpw);
 		sql = "select a.no no, a.title title, a.content content, ";
-		sql = sql + "b.name name, a.resdate resdate ";
+		sql = sql + "b.name name, a.resdate resdate, a.author author ";
 		sql = sql + "from boarda a inner join membera b ";
-		sql = sql + "on a.author=b.id order by a.resdate desc";
+		sql = sql + "on a.author=b.id where a.no=?";
 		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, no);
 		rs = pstmt.executeQuery();
-
+		
+		if(rs.next()){
+			title = rs.getString("title");
+			content = rs.getString("content");
+			uname = rs.getString("name");
+			resdate = rs.getString("resdate");
+			author = rs.getString("author");
+		}
+	} catch(Exception e){
+		e.printStackTrace();
+	} finally {
+		rs.close();
+		pstmt.close();
+		con.close();
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -99,7 +121,7 @@
         .noti_lst {
             display: block;
             margin: 80px auto;
-            width: 700px;
+            width: 500px;
             height: 800px;
         }
 
@@ -121,6 +143,7 @@
             float: left;
             line-height: 50px;
             font-size: 20px;
+            margin-left: 50px;
         }
 
         .noti_num {
@@ -129,7 +152,7 @@
         }
 
         .noti_tit {
-            width: 200px;
+            width: 300px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -158,7 +181,7 @@
         }
 
         .noti_date {
-            width: 200px;
+            width: 120px;
             text-align: center;
         }      
 
@@ -178,65 +201,46 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.html" class="home">HOME</a> &gt;
-                    <span class="sel">게시판관리</span>
+                    <span class="sel">글보기</span>
                 </div>
             </div>
             <section class="page">
                 <div class="page_wrap">
-                    <h2 class="page_title">게시판 글 목록</h2>
+                    <h2 class="page_title">글보기</h2>
                     <ul class="noti_lst">
                         <li>
-                            <span class="noti_num item_hd">번호</span>
-                            <span class="noti_tit item_hd">제목</span>
-                            <span class="noti_auth item_hd">작성자</span>
-                            <span class="noti_date item_hd">작성일</span>
-                        </li>
-<%
-		int cnt = 0;
-		while(rs.next()){
-			cnt+=1;
-			SimpleDateFormat yymmdd = new SimpleDateFormat("yyyy-MM-dd");
-			String date = yymmdd.format(rs.getDate("resdate"));
-%>
-                        <li>
-	                        <span class="noti_num"><%=cnt %></span>
-	                        <%
-							if(sid!=null) {
-							%>
-	                        	<span class="noti_tit"><a href='boradDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a></span>
-	                        <%
-							} else {
-							%>
-								<span class="noti_tit"><%=rs.getString("title") %></span>
-							<%
-							}
-							%>
-	                        <span class="noti_auth"><%=rs.getString("name") %></span>
-	                        <span class="noti_date"><%=date %></span>	                        
+	                        <span class="noti_num">글번호</span>
+	                        <span class="noti_tit"><%=no %></span>	                      
+	                    </li>   
+	                    <li>
+	                        <span class="noti_num">제목</span>
+	                        <span class="noti_tit"><%=title %></span>	                      
 	                    </li>
-<%
-		}
-	} catch(Exception e){
-		e.printStackTrace();
-	} finally {
-		rs.close();
-		pstmt.close();
-		con.close();
-	}
-%>	                    
+	                    <li>
+	                        <span class="noti_num">내용</span>
+	                        <span class="noti_tit"><%=content %></span>	                      
+	                    </li>
+	                    <li>
+	                        <span class="noti_num">작성자</span>
+	                        <span class="noti_tit"><%=uname %></span>	                      
+	                    </li>
+	                    <li>
+	                        <span class="noti_num">작성일</span>
+	                        <span class="noti_tit"><%=resdate %></span>	                      
+	                    </li>              
                     </ul>
                     <div class="btn_group">
-					<%
-						if(sid!=null) {
-					%>
-						<a href="boardWrite.jsp" class="btn primary">글 쓰기</a>
-					<%
-						}
-					%>
+						<a href="boardList.jsp" class="btn primary">게시판 목록</a>
+						<%
+							if(sid.equals("admin") || sid.equals(author)) {
+						%>
+						<a href='boardModify.jsp?no=<%=no %>' class="btn primary">글 수정</a>
+						<a href='boardDel.jsp?no=<%=no %>' class="btn primary">글 삭제</a>
+						<% } %>
 					</div>
                 </div>
             </section>
-        </div>        	
+        </div>
         <footer class="ft">
             <%@ include file="footer.jsp" %>
         </footer>

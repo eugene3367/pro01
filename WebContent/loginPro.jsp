@@ -21,9 +21,9 @@
 	String sql = "";
 	
 	try {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Class.forName("oracle.jdbc.OracleDriver");
 		con = DriverManager.getConnection(url, dbid, dbpw);
-		sql = "select * from MEMBERA where id=? and pw=?";
+		sql = "select * from membera where id=? and pw=?";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, pw);
