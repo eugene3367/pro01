@@ -19,7 +19,7 @@
     		<a href="memList.jsp">회원관리</a>
 	        <a href="boardList.jsp">게시판관리</a>
 	        <a href="logout.jsp">로그아웃</a>
-	        <a href="sitemap.jsp">사이트맵</a></nav>
+	        <a href="sitemap.jsp">사이트맵</a>
         </div>
     <%
    	}else if(id!=null){
@@ -27,7 +27,7 @@
    	<div>
    		<span class="name_print"><%=name %>님</span>
    		<a href="logout.jsp">로그아웃</a>
-   		<a href="memInfo.jsp">회원정보</a>
+   		<a href="memInfo.jsp?id=<%=id %>">회원정보</a>
    		<a href="sitemap.jsp">사이트맵</a>
    	</div>
     <%
@@ -41,6 +41,7 @@
     <%
    	}
     %>
+    </nav>
     <nav class="gnb">
         <ul>
             <li class="item1">

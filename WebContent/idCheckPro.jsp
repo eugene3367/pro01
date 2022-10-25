@@ -8,7 +8,7 @@
 	
 	String id = request.getParameter("id");
 	
-	Connection conn = null;
+	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
@@ -18,10 +18,10 @@
 	String sql = "";
 	
 	try {
-		Class.forName("oracle.jdbc.OracleDriver");
-		conn = DriverManager.getConnection(url, dbid, dbpw);
-		sql = "select * from memberA where id=? and pw=?";
-		pstmt = conn.prepareStatement(sql); //select된 데이터가 없으면, rs=null이 됨
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		con = DriverManager.getConnection(url, dbid, dbpw);
+		sql = "select * from MEMBERA where id=?";
+		pstmt = con.prepareStatement(sql); //select된 데이터가 없으면, rs=null이 됨
 		pstmt.setString(1, id);
 		
 		rs=pstmt.executeQuery(); //int cnt = pstmt.executeUpdate();
@@ -33,23 +33,23 @@
 		} else {
 			out.println("<p>"+id+"</p>");
 			out.println("<p>사용 가능한 아이디 입니다.</p>");
-			out.println("<a href='javascript:apply(\""+id+"\")'>"+id+"[적용]"+"</a>");
+			out.println("<a href='javascript:apply(\""+id+"\")'>"+id+"[적용]</a>");
 			out.println("<p>적용을 누르면, 입력하신 아이디를 사용할 수 있습니다.</p>");
 		}
 %>
 	<script>
 	function apply(fid){
-		opener.document.frm1.id.value=fid;
-		opener.document.frm1.idck.value="yes";
+		opener.document.frm1.id.value = fid;
+		opener.document.frm1.idck.value = "yes";
 		window.close();
 	}
 	</script>
 <%
 	} catch(Exception e){
 		e.printStackTrace();
-	} finally{
+	} finally {
 		rs.close();
 		pstmt.close();
-		conn.close();
+		con.close();
 	}
 %>

@@ -68,14 +68,13 @@
         .form_fr {
             border: 2px solid rgb(76, 144, 221);
             padding: 24px;
-            width: 780px;
-            height: 240px;
+            width: 600px;
+            height: 300px;
             margin: 50px auto;
         }
 
         .frm_tb {
             display: table;
-            padding-top: 20px;
         }
 
         .frm_tb li {
@@ -95,7 +94,7 @@
         }
 
         .frm_tb .td {
-            width: 200px;
+            width: 360px;
         }
 
         .frm_tb .th2,
@@ -180,10 +179,10 @@
                         <form name="frm1" action="joinPro.jsp" method="post" id="loginForm" class="frm" onsubmit="return joinAlert(this)">
                             <ul class="frm_tb">
                                 <li>
-                                    <div class="th"><label for="id">아이디</label></div>
+                                    <div class="th"><label for="id" >아이디</label></div>
                                     <div class="td">
-                                        <input type="text" id="id" name="id" class="in_dt" style="display:block; float:left;" required autofocus>
-                                        <button type="button" class="in_dt" onclick="idCheck()" style="margin-left:20px">아이디 중복 확인</button>
+                                        <input type="text" id="id" name="id" class="in_dt" style="display:block; float: left" required autofocus>
+                                        <button type="button" class="in_btn" onclick="idCheck()" style="margin-left:20px">아이디 중복 확인</button>
                                         <input type="hidden" name="idck" value="no" />
                                     </div>
                                 </li>

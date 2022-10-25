@@ -11,7 +11,7 @@
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	
-	Connection conn = null;
+	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
@@ -21,10 +21,10 @@
 	String sql = "";
 	
 	try {
-		Class.forName("oracle.jdbc.driver");
-		conn = DriverManager.getConnection(url, dbid, dbpw);
-		sql = "select * from memberA where id=? and pw=?";
-		pstmt = conn.prepareStatement(sql);
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		con = DriverManager.getConnection(url, dbid, dbpw);
+		sql = "select * from MEMBERA where id=? and pw=?";
+		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, pw);
 		
@@ -41,11 +41,10 @@
 		} else {
 			response.sendRedirect("login.jsp");
 		}
-	} catch(Exception e){
-		e.printStackTrace();
-	}finally{
 		rs.close();
 		pstmt.close();
-		conn.close();
+		con.close();
+	} catch(Exception e){
+		e.printStackTrace();
 	}
 %>

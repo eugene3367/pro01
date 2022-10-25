@@ -14,7 +14,7 @@
 	String tel = request.getParameter("tel");
 	
 	
-	Connection conn = null;
+	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
@@ -28,9 +28,9 @@
 	
 	try {
 		Class.forName("oracle.jdbc.OracleDriver");
-		conn = DriverManager.getConnection(url, dbid, dbpw);
+		con = DriverManager.getConnection(url, dbid, dbpw);
 		sql = "insert into membera values (?, ?, ?, ?, ?, sysdate)";
-		pstmt = conn.prepareStatement(sql);
+		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, pw);
 		pstmt.setString(3, name);
@@ -51,7 +51,7 @@
 		e.printStackTrace();
 	} finally {
 		pstmt.close();
-		conn.close();
+		con.close();
 	}
 
 %>

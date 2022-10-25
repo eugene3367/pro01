@@ -7,14 +7,15 @@
 <link rel="stylesheet" href="css/reset2.css">
 <style>
 .frm {
-	border: 2px solid rgb(76, 144, 221);
-	padding: 24px;
-	width: 500px;
-	height: 240px;
-	margin: 50px auto;
+    border: 2px solid rgb(76, 144, 221);
+    padding: 24px;
+    width: 400px;
+    height: 50px;
+    margin: 50px auto;
 }
-.frm:after { content:""; display:block; clear:both; }
+
 .in_dt {
+	float: left;
     background-color: #fff;
     height: 25px;
     line-height: 25px;
@@ -32,7 +33,6 @@
     height: 32px;
     line-height: 32px;
     border-radius: 20px;
-    float: left;
     margin-left: 70px;
     cursor: pointer;
     color: black;

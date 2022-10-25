@@ -6,13 +6,6 @@
 	response.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 	
-	String uid = request.getParameter("id");
-	String upw = "";
-	String uname = "";
-	String uemail = "";
-	String utel = "";
-	String uregdate = "";
-	
 	Connection con = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -23,29 +16,13 @@
 	String sql = "";
 	
 	try {
-		Class.forName("oracle.jdbc.OracleDriver");
+		Class.forName("oracle.jdbc.driver.OracleDriver");
 		con = DriverManager.getConnection(url, dbid, dbpw);
-		sql = "select * from MEMBERA where id=?";
+		sql = "select * from membera";
 		pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, uid);
 		//select된 데이터가 없으면, rs=null이 됨
 		rs = pstmt.executeQuery();
 		//int cnt = pstmt.executeUpdate();
-		
-		if(rs.next()){
-			upw = rs.getString("pw");
-			uname = rs.getString("name");
-			uemail = rs.getString("email");
-			utel = rs.getString("tel");
-			uregdate = rs.getString("regdate");
-		}
-	} catch(Exception e){
-		e.printStackTrace();
-	} finally {
-		rs.close();
-		pstmt.close();
-		con.close();
-	}
 %>
 <!DOCTYPE html>
 <html>
@@ -118,7 +95,7 @@
         .noti_lst {
             display: block;
             margin: 80px auto;
-            width: 500px;
+            width: 700px;
             height: 800px;
         }
 
@@ -140,7 +117,6 @@
             float: left;
             line-height: 50px;
             font-size: 20px;
-            margin-left: 50px;
         }
 
         .noti_num {
@@ -149,7 +125,7 @@
         }
 
         .noti_tit {
-            width: 300px;
+            width: 200px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -178,7 +154,7 @@
         }
 
         .noti_date {
-            width: 120px;
+            width: 200px;
             text-align: center;
         }      
 
@@ -198,42 +174,46 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.html" class="home">HOME</a> &gt;
-                    <span class="sel">회원정보</span>
+                    <span class="sel">게시판관리</span>
                 </div>
             </div>
             <section class="page">
                 <div class="page_wrap">
-                    <h2 class="page_title">회원정보</h2>
+                    <h2 class="page_title">게시판관리</h2>
                     <ul class="noti_lst">
                         <li>
-	                        <span class="noti_num">아이디</span>
-	                        <span class="noti_tit"><%=uid %></span>	                      
-	                    </li>   
-	                    <li>
-	                        <span class="noti_num">비밀번호</span>
-	                        <span class="noti_tit"><%=upw %></span>	                      
+                            <span class="noti_num item_hd">번호</span>
+                            <span class="noti_tit item_hd">제목</span>
+                            <span class="noti_auth item_hd">내용</span>
+                            <span class="noti_date item_hd">작성자</span>
+                            <span class="noti_date item_hd">작성일</span>
+                        </li>
+<%
+		int cnt = 0;
+		while(rs.next()){
+			cnt+=1;
+%>
+                        <li>
+	                        <span class="noti_num"><%=cnt %></span>
+	                        <span class="noti_tit"><a href='boraddetail.jsp?id=<%=rs.getString("id") %>'><%=rs.getString("id") %></a></span>
+	                        <span class="noti_auth"><%=rs.getString("content") %></span>
+	                        <span class="noti_date"><%=rs.getString("author") %></span>
+	                        <span class="noti_date"><%=rs.getString("resdate") %></span>
 	                    </li>
-	                    <li>
-	                        <span class="noti_num">이름</span>
-	                        <span class="noti_tit"><%=uname %></span>	                      
-	                    </li>
-	                    <li>
-	                        <span class="noti_num">이메일</span>
-	                        <span class="noti_tit"><%=uemail %></span>	                      
-	                    </li>
-	                    <li>
-	                        <span class="noti_num">전화번호</span>
-	                        <span class="noti_tit"><%=utel %></span>	                      
-	                    </li>
-	                    <li>
-	                        <span class="noti_num">가입일</span>
-	                        <span class="noti_tit"><%=uregdate %></span>	                      
-	                    </li>                
+<%
+		}
+	} catch(Exception e){
+		e.printStackTrace();
+	} finally {
+		rs.close();
+		pstmt.close();
+		con.close();
+	}
+%>	                    
                     </ul>
-                    <a href="memList.jsp">회원 목록</a>
                 </div>
             </section>
-        </div>
+        </div>        	
         <footer class="ft">
             <%@ include file="footer.jsp" %>
         </footer>
