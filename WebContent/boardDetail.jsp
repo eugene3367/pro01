@@ -1,51 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, java.sql.*" %>
+<%@ page import="java.util.*, java.sql.*, java.text.*" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 	
-	String sid = (String) session.getAttribute("id");
-	
-	int no = Integer.parseInt(request.getParameter("no"));
-	String title = "";
-	String content = "";
-	String uname = "";
-	String resdate = "";
-	String author = "";
-	
-	Connection con = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	
-	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String dbid = "system";
-	String dbpw = "1234";
-	String sql = "";
-	
-	try {
-		Class.forName("oracle.jdbc.OracleDriver");
-		con = DriverManager.getConnection(url, dbid, dbpw);
-		sql = "select a.no no, a.title title, a.content content, b.name name, a.resdate resdate, a.author author from boarda a inner join membera b on a.author=b.id where a.no=?";
-		pstmt = con.prepareStatement(sql);
-		pstmt.setInt(1, no);
-		rs = pstmt.executeQuery();
-		
-		if(rs.next()){
-			title = rs.getString("title");
-			content = rs.getString("content");
-			uname = rs.getString("name");
-			resdate = rs.getString("resdate");
-			author = rs.getString("author");
-		}
-	} catch(Exception e){
-		e.printStackTrace();
-	} finally {
-		rs.close();
-		pstmt.close();
-		con.close();
-	}
+	String sid = (String) session.getAttribute("id");	
 %>
 <!DOCTYPE html>
 <html>
@@ -187,6 +148,7 @@
     <link rel="stylesheet" href="footer.css">
 </head>
 <body>
+<%@ include file="connectionPool.conf" %>
     <div class="wrap">
         <header class="hd">
             <%@ include file="nav.jsp" %>
@@ -197,39 +159,50 @@
             </figure>
             <div class="bread">
                 <div class="bread_fr">
-                    <a href="index.html" class="home">HOME</a> &gt;
+                    <a href="index.jsp" class="home">HOME</a> &gt;
                     <span class="sel">글보기</span>
                 </div>
             </div>
             <section class="page">
                 <div class="page_wrap">
                     <h2 class="page_title">글보기</h2>
+<%
+		int no = Integer.parseInt(request.getParameter("no"));
+		sql = "select a.no no, a.author author, a.title tit, a.content con, b.name nm, to_char(a.resdate, 'yyyy-MM-dd') res from boarda a inner join membera b on a.author=b.id where a.no=?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, no);
+		rs = pstmt.executeQuery();
+		String author = ""; 
+		if(rs.next()){
+			author = rs.getString("author");
+%>                    
                     <ul class="noti_lst">
                         <li>
 	                        <span class="noti_num">글번호</span>
-	                        <span class="noti_tit"><%=no %></span>	                      
+	                        <span class="noti_tit"><%=rs.getInt("no") %></span>	                      
 	                    </li>   
 	                    <li>
 	                        <span class="noti_num">제목</span>
-	                        <span class="noti_tit"><%=title %></span>	                      
+	                        <span class="noti_tit"><%=rs.getString("tit") %></span>	                      
 	                    </li>
 	                    <li>
 	                        <span class="noti_num">내용</span>
-	                        <span class="noti_tit"><%=content %></span>	                      
+	                        <span class="noti_tit"><%=rs.getString("con") %></span>	                      
 	                    </li>
 	                    <li>
 	                        <span class="noti_num">작성자</span>
-	                        <span class="noti_tit"><%=uname %></span>	                      
+	                        <span class="noti_tit"><%=rs.getString("nm") %></span>	                      
 	                    </li>
 	                    <li>
 	                        <span class="noti_num">작성일</span>
-	                        <span class="noti_tit"><%=resdate %></span>	                      
+	                        <span class="noti_tit"><%=rs.getString("res") %></span>	                      
 	                    </li>              
                     </ul>
+                    <% } %>
                     <div class="btn_group">
 						<a href="boardList.jsp" class="btn primary">게시판 목록</a>
 						<%
-							if(sid.equals("admin") || sid.equals(author)) {
+							if(sid.equals("keg") || sid.equals(author)) {
 						%>
 						<a href='boardModify.jsp?no=<%=no %>' class="btn primary">글 수정</a>
 						<a href='boardDel.jsp?no=<%=no %>' class="btn primary">글 삭제</a>
@@ -242,5 +215,6 @@
             <%@ include file="footer.jsp" %>
         </footer>
     </div>
+<%@ include file="connectionClose.conf" %>
 </body>
 </html>

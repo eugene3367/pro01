@@ -17,13 +17,25 @@
 	String dbpw = "1234";
 	String sql = "";
 	
+	int cnt = 0;
+	int amount = 0;
+	int curPage = 1;
+	int pageCount = 1;
+	int startNum = 1;
+	int endNum = 10;
+	
 	try {
 		Class.forName("oracle.jdbc.OracleDriver");
 		con = DriverManager.getConnection(url, dbid, dbpw);
-		sql = "select a.no no, a.title title, a.content content,b.name name, a.resdate resdate from boarda a inner join membera b on a.author=b.id order by a.resdate desc";
+		//게시글 수 카운트
+		sql = "select count(*) cnt from boarda";
 		pstmt = con.prepareStatement(sql);
 		rs = pstmt.executeQuery();
-
+		if(rs.next()){
+			amount = rs.getInt("cnt");
+		}
+		rs.close();
+		pstmt.close();
 %>
 <!DOCTYPE html>
 <html>
@@ -198,12 +210,28 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.html" class="home">HOME</a> &gt;
-                    <span class="sel">게시판관리</span>
+                    <span class="sel">게시판 글 목록</span>
                 </div>
             </div>
+<%
+	if(request.getParameter("curPage")!=null){
+		curPage = Integer.parseInt(request.getParameter("curPage"));
+	}
+	
+	pageCount = (amount % 10==0) ? (amount / 10) : (amount / 10) + 1;
+	startNum = curPage * 10 - 9;
+	endNum = curPage * 10;
+	if(endNum>amount){
+		endNum = amount;
+	}
+%>            
             <section class="page">
                 <div class="page_wrap">
                     <h2 class="page_title">게시판 글 목록</h2>
+                    <div class="tb_com">
+  						<strong class="cur">현재 페이지 : <%=curPage %></strong>
+  						<strong class="total">총 글수 : <%=amount %>건</strong>
+  					</div>
                     <ul class="noti_lst">
                         <li>
                             <span class="noti_num item_hd">번호</span>
@@ -212,9 +240,18 @@
                             <span class="noti_date item_hd">작성일</span>
                         </li>
 <%
-		int cnt = 0;
+		pstmt = null;
+		rs = null;
+		//게시글 검색
+		sql = "select no, title, content, author, resdate from (select rownum rn, no, title, content, author, resdate from boarda order by no desc) t1 where t1.rn between ? and ?";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, startNum);
+		pstmt.setInt(2, endNum);
+		rs = pstmt.executeQuery();
+		cnt = startNum - 1;
 		while(rs.next()){
-			cnt+=1;
+			cnt++;
+			//작성일의 날짜 데이터를 특정 문자열 형식으로 변환
 			SimpleDateFormat yymmdd = new SimpleDateFormat("yyyy-MM-dd");
 			String date = yymmdd.format(rs.getDate("resdate"));
 %>
@@ -223,7 +260,7 @@
 	                        <%
 							if(sid!=null) {
 							%>
-	                        	<span class="noti_tit"><a href='boradDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a></span>
+	                        	<span class="noti_tit"><a href='boardDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a></span>
 	                        <%
 							} else {
 							%>
@@ -231,7 +268,7 @@
 							<%
 							}
 							%>
-	                        <span class="noti_auth"><%=rs.getString("name") %></span>
+	                        <span class="noti_auth"><%=rs.getString("author") %></span>
 	                        <span class="noti_date"><%=date %></span>	                        
 	                    </li>
 <%
@@ -245,12 +282,20 @@
 	}
 %>	                    
 						<li>
-							<span class="pageindex">
-<%-- 							<% int pageCount = (amount<=10)? 1 : amount/10+1;
-							for(int i=1;i<=pagecount;i++){
-							%> --%>
-								<a href="boardList.jsp"></a>
-							<!-- } -->
+							<span class="page_nation_fr">
+							<% 
+							   for(int i=1;i<=pageCount;i++) { 
+								   if(i==curPage) {
+							%>
+								<span><%=i %>&nbsp;</span>
+							<% 
+								   } else {
+							%>
+								<a href="boardList.jsp?curPage=<%=i %>">[<%=i %>]&nbsp;</a>
+							<%		   
+								   }
+								} 
+							%>
 							</span>
 						</li>
 	                    <li>
