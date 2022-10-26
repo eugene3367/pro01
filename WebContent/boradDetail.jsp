@@ -27,10 +27,7 @@
 	try {
 		Class.forName("oracle.jdbc.OracleDriver");
 		con = DriverManager.getConnection(url, dbid, dbpw);
-		sql = "select a.no no, a.title title, a.content content, ";
-		sql = sql + "b.name name, a.resdate resdate, a.author author ";
-		sql = sql + "from boarda a inner join membera b ";
-		sql = sql + "on a.author=b.id where a.no=?";
+		sql = "select a.no no, a.title title, a.content content, b.name name, a.resdate resdate, a.author author from boarda a inner join membera b on a.author=b.id where a.no=?";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, no);
 		rs = pstmt.executeQuery();

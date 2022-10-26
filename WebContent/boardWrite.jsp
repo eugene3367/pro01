@@ -83,7 +83,7 @@
             clear: both;
             height: 55px;
             line-height: 32px;
-            border-bottom: 2px solid rgb(157, 175, 212);
+            border-top: 2px solid rgb(157, 175, 212);
             box-sizing: border-box;
         }
 
@@ -128,16 +128,21 @@
             padding-right: 12px;
             color: #333;
         }
-
-        .noti_auth {
-            width: 100px;
-            text-align: center;
+        
+        .in_data {        
+            background-color: #fff;
+            height: 25px;
+            line-height: 25px;
+            width: 200px;
+            color: blue;
+            font-size: 16px;
+            text-indent: 0.5em;
+            margin-top: 5px;
+            border: 1px solid black;
         }
-
-        .noti_date {
-            width: 120px;
-            text-align: center;
-        }      
+        .btn.primary {
+        	color: #fff;
+        }
 
         /* footer.css */
     </style>
@@ -161,24 +166,27 @@
             <section class="page">
                 <div class="page_wrap">
                     <h2 class="page_title">글 쓰기</h2>
-                    <ul class="noti_lst">
-                        <li>
-	                        <span class="noti_num">제목</span>
-	                        <span class="noti_tit"><input type="text" name="title" id="title" class="in_data" required /></span>	                      
-	                    </li>   
-	                    <li>
-	                        <span class="noti_num">내용</span>
-	                        <span class="noti_tit"><textarea cols="100" rows="8" name="content" id="content"></textarea></span>	                      
-	                    </li>
-	                    <li>
-	                        <span class="noti_num">작성자</span>
-	                        <span class="noti_tit"><%=sid %><input type="hidden" name="author" id="author" value="<%=sid %>"></span>	                      
-	                    </li>	                    	                                
-                    </ul>
-                    <div class="btn_group">
-						<button type="submit" class="btn primary">글 쓰기</button>
-						<a href="boardList.jsp" class="btn primary">게시판 목록</a>
-					</div>
+                    <form name="frm" action="boardWritePro.jsp" method="post" class="frm">
+	                    <ul class="noti_lst">
+	                        <li>
+		                        <span class="noti_num">제목</span>
+		                        <span class="noti_tit"><input type="text" name="title" id="title" class="in_data" required /></span>	                      
+		                    </li>   
+		                    <li>
+		                        <span class="noti_num">내용</span>
+		                        <span class="noti_tit"><textarea cols="40" rows="20" name="content" id="content"></textarea></span>	                      
+		                    </li>
+		                    <li>
+		                        <span class="noti_num">작성자</span>
+		                        <span class="noti_tit"><%=sid %><input type="hidden" name="author" id="author" value="<%=sid %>"></span>	                      
+		                    </li>
+		                    <li>
+			                    <span class="btn_group">
+									<button type="submit" class="btn primary">글 쓰기</button>
+									<button><a href="boardList.jsp" class="btn primary">게시판 목록</a></button></span>
+							</li>                    	                                
+	                    </ul>
+					</form>
                 </div>
             </section>
         </div>

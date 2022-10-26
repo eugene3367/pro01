@@ -27,10 +27,7 @@
 	try {
 		Class.forName("oracle.jdbc.OracleDriver");
 		con = DriverManager.getConnection(url, dbid, dbpw);
-		sql = "select a.no no, a.title title, a.content content, ";
-		sql = sql + "b.name name, a.resdate resdate, a.author author ";
-		sql = sql + "from boarda a inner join membera b ";
-		sql = sql + "on a.author=b.id where a.no=?";
+		sql = "select a.no no, a.title title, a.content content, b.name name, a.resdate resdate, a.author author from boarda a inner join membera b on a.author=b.id where a.no=?";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, no);
 		rs = pstmt.executeQuery();
@@ -207,28 +204,30 @@
             <section class="page">
                 <div class="page_wrap">
                     <h2 class="page_title">글 수정하기</h2>
-                    <ul class="noti_lst">
-                        <li>
-	                        <span class="noti_num">글번호</span>
-	                        <span class="noti_tit"><%=no %><input type="hidden" name="no" id="no" value="<%=no %>" readonly></span>	                      
-	                    </li>   
-	                    <li>
-	                        <span class="noti_num">제목</span>
-	                        <span class="noti_tit"><input type="text" name="title" id="title" value="<%=title %>" class="in_data" required /></span>	                      
-	                    </li>
-	                    <li>
-	                        <span class="noti_num">내용</span>
-	                        <span class="noti_tit"><textarea cols="100" rows="8" name="content" id="content"><%=content %></textarea></span>	                      
-	                    </li>
-	                    <li>
-	                        <span class="noti_num">작성자</span>
-	                        <span class="noti_tit"><%=uname %></span>	                      
-	                    </li>	                                
-                    </ul>
-                    <div class="btn_group">
-						<button type="submit" class="btn primary">글 수정하기</button>
-						<a href="boardList.jsp" class="btn primary">게시판 목록</a>
-					</div>
+                    <form name="frm" action="boardModifyPro.jsp" method="post" class="frm">
+	                    <ul class="noti_lst">
+	                        <li>
+		                        <span class="noti_num">글번호</span>
+		                        <span class="noti_tit"><%=no %><input type="hidden" name="no" id="no" value="<%=no %>" readonly></span>	                      
+		                    </li>   
+		                    <li>
+		                        <span class="noti_num">제목</span>
+		                        <span class="noti_tit"><input type="text" name="title" id="title" value="<%=title %>" class="in_data" required /></span>	                      
+		                    </li>
+		                    <li>
+		                        <span class="noti_num">내용</span>
+		                        <span class="noti_tit"><textarea cols="100" rows="8" name="content" id="content"><%=content %></textarea></span>	                      
+		                    </li>
+		                    <li>
+		                        <span class="noti_num">작성자</span>
+		                        <span class="noti_tit"><%=uname %></span>	                      
+		                    </li>	                                
+	                    </ul>
+	                    <div class="btn_group">
+							<button type="submit" class="btn primary">글 수정하기</button>
+							<a href="boardList.jsp" class="btn primary">게시판 목록</a>
+						</div>
+					</form>
                 </div>
             </section>
         </div>

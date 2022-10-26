@@ -20,10 +20,7 @@
 	try {
 		Class.forName("oracle.jdbc.OracleDriver");
 		con = DriverManager.getConnection(url, dbid, dbpw);
-		sql = "select a.no no, a.title title, a.content content, ";
-		sql = sql + "b.name name, a.resdate resdate ";
-		sql = sql + "from boarda a inner join membera b ";
-		sql = sql + "on a.author=b.id order by a.resdate desc";
+		sql = "select a.no no, a.title title, a.content content,b.name name, a.resdate resdate from boarda a inner join membera b on a.author=b.id order by a.resdate desc";
 		pstmt = con.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 
@@ -114,6 +111,9 @@
         .noti_lst li:first-child {
             border-top: 3px solid #333;
         }
+        .noti_lst li:last-child {
+		    border-bottom: 0px;
+		}
 
         .noti_lst li span {
             display: block;
@@ -161,6 +161,26 @@
             width: 200px;
             text-align: center;
         }      
+        
+        .btn_group {
+            display: block;
+            background-color: rgb(225, 222, 248);
+			width: 100px;
+            line-height: 32px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: black;
+            margin-top: 20px;
+        }
+
+        .btn_group:hover {
+            background-color: rgb(182, 174, 231);
+        }
+        
+        .btn_primary {
+        	padding-left: 15px;
+    		color: black;
+    		font-weight: 600;}
 
         /* footer.css */
     </style>
@@ -224,16 +244,27 @@
 		con.close();
 	}
 %>	                    
+						<li>
+							<span class="pageindex">
+<%-- 							<% int pageCount = (amount<=10)? 1 : amount/10+1;
+							for(int i=1;i<=pagecount;i++){
+							%> --%>
+								<a href="boardList.jsp"></a>
+							<!-- } -->
+							</span>
+						</li>
+	                    <li>
+		                    <span class="btn_group">
+							<%
+								if(sid!=null) {
+							%>
+								<a href="boardWrite.jsp" class="btn_primary">글 쓰기</a>
+							<%
+								}
+							%>
+							</span>
+						</li>
                     </ul>
-                    <div class="btn_group">
-					<%
-						if(sid!=null) {
-					%>
-						<a href="boardWrite.jsp" class="btn primary">글 쓰기</a>
-					<%
-						}
-					%>
-					</div>
                 </div>
             </section>
         </div>        	

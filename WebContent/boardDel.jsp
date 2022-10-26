@@ -10,7 +10,6 @@
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
-	ResultSet rs = null;
 	
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String dbid = "system";
@@ -33,7 +32,6 @@
 	} catch(Exception e){
 		e.printStackTrace();
 	} finally {
-		rs.close();
 		pstmt.close();
 		con.close();
 	}
