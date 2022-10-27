@@ -193,6 +193,17 @@
         	padding-left: 15px;
     		color: black;
     		font-weight: 600;}
+    		
+    	.page_nation_fr {
+		    text-decoration: none;
+		    display: block;
+		    width: 500px;
+		    margin: 0px auto;
+		    text-align: center;
+		    margin-top: -200px;
+		    font-size: 17px;
+		    font-weight: 550;
+    	}
 
         /* footer.css */
     </style>
@@ -248,9 +259,9 @@
 		pstmt.setInt(1, startNum);
 		pstmt.setInt(2, endNum);
 		rs = pstmt.executeQuery();
-		cnt = startNum - 1;
+		cnt = amount - (curPage-1) * 10;
 		while(rs.next()){
-			cnt++;
+			cnt--;
 			//작성일의 날짜 데이터를 특정 문자열 형식으로 변환
 			SimpleDateFormat yymmdd = new SimpleDateFormat("yyyy-MM-dd");
 			String date = yymmdd.format(rs.getDate("resdate"));
@@ -280,25 +291,7 @@
 		pstmt.close();
 		con.close();
 	}
-%>	                    
-						<li>
-							<span class="page_nation_fr">
-							<% 
-							   for(int i=1;i<=pageCount;i++) { 
-								   if(i==curPage) {
-							%>
-								<span><%=i %>&nbsp;</span>
-							<% 
-								   } else {
-							%>
-								<a href="boardList.jsp?curPage=<%=i %>">[<%=i %>]&nbsp;</a>
-							<%		   
-								   }
-								} 
-							%>
-							</span>
-						</li>
-	                    <li>
+%>	                    <li>
 		                    <span class="btn_group">
 							<%
 								if(sid!=null) {
@@ -309,7 +302,23 @@
 							%>
 							</span>
 						</li>
+
                     </ul>
+					<span class="page_nation_fr">
+					<% 
+					   for(int i=1;i<=pageCount;i++) { 
+						   if(i==curPage) {
+					%>
+						<%=i %>&nbsp;
+					<% 
+						   } else {
+					%>
+						<a href="boardList.jsp?curPage=<%=i %>">[<%=i %>]&nbsp;</a>
+					<%		   
+						   }
+						} 
+					%>
+					</span>                	
                 </div>
             </section>
         </div>        	

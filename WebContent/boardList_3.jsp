@@ -6,7 +6,7 @@
 	response.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 	
-	String sid = (String) session.getAttribute("id");
+	String uid = (String) session.getAttribute("id");
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -260,10 +260,10 @@
                         <li>
 	                        <span class="noti_num"><%=cnt %></span>
 	                        <%
-							if(sid!=null) {							
-								out.println("<span class="noti_tit"><a href='boardDetail.jsp?no="+no+"'>"+title+"</a></span>");	                        
+							if(uid!=null) {							
+								out.println("<span class='noti_tit'><a href='boardDetail.jsp?no="+no+"'>"+title+"</a></span>");	                        
 							} else {							
-								out.println("<span class="noti_tit">"+title+"</span>");							
+								out.println("<span class='noti_tit'>"+title+"</span>");							
 							}
 							%>
 	                        <span class="noti_auth"><%=rs.getString("author") %></span>

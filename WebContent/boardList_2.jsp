@@ -208,13 +208,17 @@
             <section class="page">
                 <div class="page_wrap">
                     <h2 class="page_title">게시판 글 목록</h2>
-                    <ul class="noti_lst">
-                        <li>
-                            <span class="noti_num item_hd">번호</span>
-                            <span class="noti_tit item_hd">제목</span>
-                            <span class="noti_auth item_hd">작성자</span>
-                            <span class="noti_date item_hd">작성일</span>
-                        </li>
+                    	<div class="tb_fr">
+		                    <table class="noti_lst" id="myTable">
+		                        <thead>
+		                        	<tr>
+			                            <th class="noti_num item_hd">번호</th>
+			                            <th class="noti_tit item_hd">제목</th>
+			                            <th class="noti_auth item_hd">작성자</th>
+			                            <th class="noti_date item_hd">작성일</th>
+		                            </tr>
+		                        </thead>
+		                        <tbody>
 <%
 		//게시글 검색
 		sql = "select * from boarda";
@@ -226,22 +230,18 @@
 			SimpleDateFormat yymmdd = new SimpleDateFormat("yyyy-MM-dd");
 			String date = yymmdd.format(rs.getDate("resdate"));
 %>
-                        <li>
-	                        <span class="noti_num"><%=cnt %></span>
-	                        <%
-							if(sid!=null) {
-							%>
-	                        	<span class="noti_tit"><a href='boradDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a></span>
-	                        <%
-							} else {
-							%>
-								<span class="noti_tit"><%=rs.getString("title") %></span>
-							<%
-							}
-							%>
-	                        <span class="noti_auth"><%=rs.getString("author") %></span>
-	                        <span class="noti_date"><%=date %></span>	                        
-	                    </li>
+		                        	<tr>
+				                        <td class="noti_num"><%=cnt %></td>
+				                        <td>
+				                        <%	if(sid!=null) {	%>
+				                        	<span class="noti_tit"><a href='boradDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a></span>
+				                        <%	} else {	%>
+											<span class="noti_tit"><%=rs.getString("title") %></span>
+										<%	}	%>
+										</td>
+				                        <td class="noti_auth"><%=rs.getString("author") %></td>
+				                        <td class="noti_date"><%=date %></td>
+				                    </tr>
 <%
 		}
 	} catch(Exception e){
@@ -251,19 +251,15 @@
 		pstmt.close();
 		con.close();
 	}
-%>	                    
-	                    <li>
-		                    <span class="btn_group">
-							<%
-								if(sid!=null) {
-							%>
+%>
+			                    </tbody>
+		                    </table>
+		                   	<div class="btn_group">
+								<% if(sid!=null) {	%>
 								<a href="boardWrite.jsp" class="btn_primary">글 쓰기</a>
-							<%
-								}
-							%>
-							</span>
-						</li>
-                    </ul>
+								<%	}	%>
+							</div>
+						</div>
                 </div>
             </section>
         </div>        	

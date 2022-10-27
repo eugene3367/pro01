@@ -80,7 +80,7 @@
             display: block;
             margin: 80px auto;
             width: 500px;
-            height: 800px;
+            height: 400px;
         }
 
         .noti_lst li {
@@ -142,6 +142,22 @@
             width: 120px;
             text-align: center;
         }      
+        
+        .btn.primary{
+		    display: block;
+		    float: left;
+		    background-color: rgb(225, 222, 248);
+		    width: 100px;
+		    line-height: 40px;
+		    border-radius: 20px;
+		    cursor: pointer;
+		    color: black;
+		    margin-top: 20px;
+		    margin-left: 20px;
+		    font-weight: 700;
+		    text-align: center;
+		    }
+		        
 
         /* footer.css */
     </style>
@@ -196,10 +212,8 @@
 	                    <li>
 	                        <span class="noti_num">작성일</span>
 	                        <span class="noti_tit"><%=rs.getString("res") %></span>	                      
-	                    </li>              
-                    </ul>
-                    <% } %>
-                    <div class="btn_group">
+	                    </li> 
+	                    <div class="btn_group">
 						<a href="boardList.jsp" class="btn primary">게시판 목록</a>
 						<%
 							if(sid.equals("keg") || sid.equals(author)) {
@@ -207,7 +221,10 @@
 						<a href='boardModify.jsp?no=<%=no %>' class="btn primary">글 수정</a>
 						<a href='boardDel.jsp?no=<%=no %>' class="btn primary">글 삭제</a>
 						<% } %>
-					</div>
+					</div>             
+                    </ul>
+                    <% } %>
+
                 </div>
             </section>
         </div>

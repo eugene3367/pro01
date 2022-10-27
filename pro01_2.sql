@@ -60,3 +60,5 @@ delete from boarda where no=1;
 -- delete from boarda where no=?;
 -- pstmt.setInt(1, no);
 
+select sysdate now from dual;
+

@@ -126,7 +126,7 @@
             clear: both;
             height: 55px;
             line-height: 32px;
-            border-bottom: 2px solid rgb(157, 175, 212);
+            border-top: 2px solid rgb(157, 175, 212);
             box-sizing: border-box;
         }
 
@@ -154,33 +154,37 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
-        .item_hd {
-            font-weight: 700;
+        #content {
+    		margin-top: 20px;
+		}
+        
+        #title {        
+            background-color: #fff;
+            height: 25px;
+            line-height: 25px;
+            width: 200px;
+            color: blue;
+            font-size: 16px;
+            text-indent: 0.5em;
+            margin-top: 5px;
+            border: 1px solid black;
         }
 
-        .noti_tit.item_hd {
-            text-align: center;
+        .btn.primary {		    
+			display: block;
+		    background-color: rgb(225, 222, 248);
+		    width: 120px;
+		    line-height: 32px;
+		    border-radius: 20px;
+		    cursor: pointer;
+		    color: black;
+		    margin-top: 20px;
+		    font-weight: 900
         }
-
-        .noti_tit a {
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            padding-right: 12px;
-            color: #333;
+        .btn.primary a {
+        	color: black;
         }
-
-        .noti_auth {
-            width: 100px;
-            text-align: center;
-        }
-
-        .noti_date {
-            width: 120px;
-            text-align: center;
-        }      
+             
 
         /* footer.css */
     </style>
@@ -216,17 +220,17 @@
 		                    </li>
 		                    <li>
 		                        <span class="noti_num">내용</span>
-		                        <span class="noti_tit"><textarea cols="100" rows="8" name="content" id="content"><%=content %></textarea></span>	                      
+		                        <span class="noti_tit"><textarea cols="40" rows="20" name="content" id="content"><%=content %></textarea></span>	                      
 		                    </li>
 		                    <li>
 		                        <span class="noti_num">작성자</span>
 		                        <span class="noti_tit"><%=uname %></span>	                      
-		                    </li>	                                
+		                    </li>
+		                    <li class="btn_group">
+								<span><button type="submit" class="btn primary">글 수정하기</button></span>
+								<span><button class="btn primary"><a href="boardList.jsp" >게시판 목록</a></button></span>
+							</li>                                
 	                    </ul>
-	                    <div class="btn_group">
-							<button type="submit" class="btn primary">글 수정하기</button>
-							<a href="boardList.jsp" class="btn primary">게시판 목록</a>
-						</div>
 					</form>
                 </div>
             </section>
