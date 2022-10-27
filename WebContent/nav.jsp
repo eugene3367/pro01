@@ -80,7 +80,7 @@
                 <a href="custom.jsp#page1" class="dp1">고객지원</a>
                 <ul class="sub">
                     <li><a href="custom.jsp#page1">공지사항</a></li>
-                    <li><a href="custom.jsp#page2">FAQ</a></li>
+                    <li><a href="faq.jsp">FAQ</a></li>
                     <li><a href="custom.jsp#page3">오시는길</a></li>
                 </ul>
             </li>
