@@ -49,7 +49,7 @@
 		pstmt = null;
 		
 		con = DriverManager.getConnection(url, dbid, dbpw);		
-		sql = "insert into faqa values (fseq.nextval, ?, ?, 'admin', sysdate, 1, ?)";
+		sql = "insert into faqa values (fseq.nextval, ?, ?, 'keg', sysdate, 1, ?)";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, title2);
 		pstmt.setString(2, content2);

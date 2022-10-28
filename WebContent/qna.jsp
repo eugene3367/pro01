@@ -25,8 +25,8 @@
 	try {
 		Class.forName("oracle.jdbc.OracleDriver");
 		con = DriverManager.getConnection(url, dbid, dbpw);
-		//게시글 수 카운트
-		sql = "select * from faqa order by parno asc, gubun asc";
+		//질문 및 답변 목록
+		sql = "select * from qnaa order by parno desc, lev asc, no asc";
 		pstmt = con.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		
@@ -130,7 +130,8 @@
         }
 
         .noti_num {
-            width: 80px;
+            min-width: 80px;
+    		min-height: 50px;
             text-align: center;
         }
 
@@ -215,12 +216,12 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.html" class="home">HOME</a> &gt;
-                    <span class="sel">FAQ</span>
+                    <span class="sel">QNA</span>
                 </div>
             </div>          
             <section class="page">
                 <div class="page_wrap">
-                    <h2 class="page_title">FAQ</h2>
+                    <h2 class="page_title">QNA</h2>
                     <ul class="noti_lst">
                         <li>
                             <span class="noti_num item_hd">번호</span>
@@ -228,21 +229,73 @@
                             <span class="noti_auth item_hd">작성자</span>
                             <span class="noti_date item_hd">작성일</span>
                         </li>
+                        
+        
 <%
 		while(rs.next()){
-			cnt++;
 			//작성일의 날짜 데이터를 특정 문자열 형식으로 변환
 			SimpleDateFormat yymmdd = new SimpleDateFormat("yyyy-MM-dd");
 			String date = yymmdd.format(rs.getDate("resdate"));
 %>
                         <li>
-	                        <span class="noti_num"><%=cnt %></span>
-	                        	<%	if(rs.getInt("gubun")==0) {	%>
-	                        <span class="noti_tit"><a href='faqDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a></span>
-	                        	<%	} else {	%>
-							<span class="noti_tit"><a href='faqDetail.jsp?no=<%=rs.getInt("no") %>' style="padding-left:36px;"><%="↪ "+rs.getString("title") %></a></span>
-								<%	}	%>
-	                        <span class="noti_auth"><%=rs.getString("author") %></span>
+                        	<% if(rs.getInt("lev")==0){
+                        		cnt++; %>
+                        	<span class="noti_num"><%=cnt %></span>
+                        	<% } else { %>                       	
+	                        <span class="noti_num"></span>
+	                        <%} %>
+	                        
+	                        
+	                        
+<% 
+						if(rs.getInt("lev")==0) {
+							if(rs.getString("sec").equals("Y")) {
+								if(uid.equals(rs.getString("author")) || uid.equals("keg")){
+					%>
+									<span class="noti_tit"><a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a></span>
+					<%
+								} else {
+					%>	
+									<span class="noti_tit"><%=rs.getString("title") %></span>
+					<%
+								}
+							} else if(rs.getString("sec").equals("N") && uid!="guest"){
+					%>	
+									<span class="noti_tit"><a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>'><%=rs.getString("title") %></a></span>
+					<%
+							} else {
+					%>	
+									<span class="noti_tit"><%=rs.getString("title") %></span>
+					<%
+							}
+					%>
+					<% 
+						} else {
+							if(rs.getString("sec").equals("Y")) {
+								if(uid.equals(rs.getString("author")) || uid.equals("keg")){
+					%>
+									<span class="noti_tit"><a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>' style="padding-left:60px;" class="sec2"><%=rs.getString("title") %></a></span>
+					<%
+								} else {
+					%>
+									<span class="noti_tit" style="padding-left:60px;"><%=rs.getString("title") %></span>				
+					<%
+								}		
+							} else if(rs.getString("sec").equals("N") && uid!="guest"){
+					%>
+								<span class="noti_tit"><a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>' style="padding-left:60px;"><%=rs.getString("title") %></a></span>						
+					<%
+							} else {
+					%>
+						 		<span class="noti_tit" style="padding-left:60px;"><%=rs.getString("title") %></span>
+					<%
+							}
+						} 
+					%>
+									
+							
+															
+	                        <span class="noti_auth"><%=rs.getString("author") %></span>                   
 	                        <span class="noti_date"><%=date %></span>	                        
 	                    </li>
 <%
@@ -256,8 +309,10 @@
 	}
 %>	                    <li>
 		                    <span class="btn_group">
-							<% if(uid.equals("keg")) { %>
-							<a href="faqWrite.jsp" class="btn primary">FAQ 등록</a>
+							<% if(uid!="guest") { %>
+							<a href="qnaWrite.jsp" class="btn primary">QNA 등록</a>
+							<% } else { %>
+							<p style="clear:both;">회원가입 후 로그인 하셔야 질문 및 답변을 보실 수 있습니다.</p>
 							<% } %>
 							</span>
 						</li>

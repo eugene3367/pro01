@@ -27,7 +27,7 @@
    	<div>
    		<span class="name_print"><%=name %>님</span>
    		<a href="logout.jsp">로그아웃</a>
-   		<a href="memInfo.jsp?id=<%=id %>">회원정보</a>
+   		<a href="memInfo.jsp">회원정보</a>
    		<a href="sitemap.jsp">사이트맵</a>
    	</div>
     <%
@@ -50,6 +50,7 @@
                     <li><a href="company.jsp#page1">비전</a></li>
                     <li><a href="company.jsp#page2">대표이사 메세지</a></li>
                     <li><a href="company.jsp#page3">포스코 CI</a></li>
+                    <li><a href="custom.jsp#page3">오시는길</a></li>
                 </ul>
             </li>
             <li class="item2">
@@ -78,10 +79,13 @@
             </li>
             <li class="item5">
                 <a href="custom.jsp#page1" class="dp1">고객지원</a>
-                <ul class="sub">
-                    <li><a href="custom.jsp#page1">공지사항</a></li>
+                <ul class="sub">                    
                     <li><a href="faq.jsp">FAQ</a></li>
-                    <li><a href="custom.jsp#page3">오시는길</a></li>
+                    <li><a href="qna.jsp">QNA</a></li>           
+                    <li><a href="boardList.jsp">게시판</a></li>
+                    <% if(id!=null){ %>  
+                    <li><a href="online.jsp">온라인 상담</a></li>
+                    <% } %>       
                 </ul>
             </li>
         </ul>

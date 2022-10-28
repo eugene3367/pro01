@@ -207,7 +207,7 @@
                                 <li>
                                     <div class="th"><label for="email">이메일</label></div>
                                     <div class="td">
-                                        <input type="email" id="email" name="email" class="in_dt" required>
+                                        <input type="email" id="email" name="email" class="in_dt" required pattern=".@naver\.com" placeholder="naver 메일 주소 입력">
                                     </div>
                                 </li>
                                 <li>

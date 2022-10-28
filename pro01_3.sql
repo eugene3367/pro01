@@ -1,7 +1,7 @@
 create table faqa(
 no number primary key, 
 title varchar2(100) not null,
-contenct varchar2(600),
+content varchar2(600),
 author varchar2(16),
 resdate date default sysdate,
 gubun number not null,	-- 질문(0), 답변(1) 구분
@@ -36,5 +36,8 @@ select * from faqa;
 -- delete from faqa where parno=?
 delete from faqa where parno=16;
 select fseq.currval from dual;
+
+drop table faqa;
+drop sequence fseq;
 
 

@@ -164,13 +164,13 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.html" class="home">HOME</a> &gt;
-                    <span class="sel">FAQ 등록하기</span>
+                    <span class="sel">QNA 등록하기</span>
                 </div>
             </div>
             <section class="page">
                 <div class="page_wrap">
-                    <h2 class="page_title">FAQ 등록하기</h2>
-                    <form name="frm" action="faqWritePro.jsp" method="post" class="frm">
+                    <h2 class="page_title">QNA 등록하기</h2>
+                    <form name="frm" action="qnaWritePro.jsp" method="post" class="frm">
 	                    <ul class="noti_lst">
 	                        <li>
 		                        <span class="noti_num"><label for="title">제목</label></span>
@@ -181,16 +181,19 @@
 		                        <span class="noti_tit"><textarea cols="40" rows="20" name="content" id="content" class="in_data2"></textarea></span>	                      
 		                    </li>
 		                    <li>
-		                        <span class="noti_num"><label for="content2">답변 내용</label></span>
-		                        <span class="noti_tit"><textarea cols="40" rows="20" name="content2" id="content2" class="in_data2"></textarea></span>	                      
+		                        <span class="noti_num"><label for="author">작성자</label></span>
+		                        <span class="noti_tit"><%=sid %><input type="hidden" name="author" id="author" class="in_data" value="<%=sid %>"></span>	                      
 		                    </li>
 		                    <li>
-		                        <span class="noti_num"><label for="author">작성자</label>   </span>
-		                        <span class="noti_tit"><input type="text" name="author" id="author" class="in_data" value="keg" readonly required></span>	                      
+		                        <span class="noti_num"><label for="author">비밀글 여부</label></span>
+		                        <span class="noti_tit">
+		                        <input type="radio" name="sec" id="sec1" value='N' checked><label for="">공개</label>
+		                        <input type="radio" name="sec" id="sec2" value='Y'><label for="">비밀글</label>	                        
+		                        </span>	                      
 		                    </li>
 		                    <li class="btn_group">
 			                    <span><button type="submit" class="btn primary">FAQ 등록</button></span>
-								<span><button class="btn primary"><a href="faq.jsp">FAQ목록</a></button></span>
+								<span><button class="btn primary"><a href="qna.jsp">FAQ목록</a></button></span>
 							</li>                    	                                
 	                    </ul>
 					</form>

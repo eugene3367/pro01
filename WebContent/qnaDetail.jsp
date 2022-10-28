@@ -177,14 +177,14 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.jsp" class="home">HOME</a> &gt;
-                    <span class="sel">FAQ 보기</span>
+                    <span class="sel">QNA 보기</span>
                 </div>
             </div>
             <section class="page">
                 <div class="page_wrap">
-                    <h2 class="page_title">FAQ 글보기</h2>
+                    <h2 class="page_title">QNA 글보기</h2>
 <%
-		sql = "select * from faqa where no=?";
+		sql = "select * from qnaa where no=?";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setInt(1, no);
 		rs = pstmt.executeQuery();
@@ -194,16 +194,20 @@
                     <ul class="noti_lst">
                     	<li>
 	                        <span class="noti_num">구분</span>
-	                        <span class="noti_tit">
-	                        <%
-								if(rs.getInt("gubun")==0){
-									out.println("질문");
-								} else {
-									out.println("답변");
-								}
-							%>
-	                        </span>	                      
-	                    </li>  
+	                        <%	if(rs.getInt("lev")==0){%>                        
+	                        <span class="noti_tit">질문</span>
+	                      	<%} else {%>
+							<span class="noti_tit">답변</span>
+							<%}	%>	                                           
+	                    </li>
+	                    <li>
+	                        <span class="noti_num">공개여부</span>
+	                        <%	if(rs.getString("sec").equals("Y")){%>                        
+	                        <span class="noti_tit">비공개</span>
+	                      	<%} else {%>
+							<span class="noti_tit">공개</span>
+							<%}	%>	                                           
+	                    </li>                 
 	                    <li>
 	                        <span class="noti_num">제목</span>
 	                        <span class="noti_tit"><%=rs.getString("title") %></span>	                      
@@ -214,20 +218,30 @@
 	                    </li>	                    
 	                    <li>
 	                        <span class="noti_num">작성자</span>
-	                        <span class="noti_tit">관리자</span>	                      
+	                        <span class="noti_tit"><%=rs.getString("author") %></span>	                      
 	                    </li>
 	                    <li>
 	                        <span class="noti_num">작성일</span>
 	                        <span class="noti_tit"><%=rs.getString("resdate") %></span>	                      
 	                    </li> 
 	                    <div class="btn_group">
-						<a href="faq.jsp" class="btn primary">FAQ 목록</a>
+						<a href="qna.jsp" class="btn primary">QNA 목록</a>
 						<%
-							if(sid.equals("keg")) {
+							if(sid.equals("keg") ){
+								if(rs.getInt("lev")==0){
 						%>
-						<a href='faqModify.jsp?no=<%=no %>' class="btn primary">글 수정</a>
-						<a href='faqDel.jsp?no=<%=no %>' class="btn primary">글 삭제</a>
-						<% } %>
+							<a href='replyWrite.jsp?parno=<%=no %>' class="btn primary">답변 하기</a>
+							<a href='qnaModify.jsp?no=<%=no %>' class="btn primary">글 수정</a>
+							<a href='qnaDel.jsp?parno=<%=no %>' class="btn primary">글 삭제</a>
+						<%	} else {	%>
+							<a href='replyModify.jsp?no=<%=no %>' class="btn primary">답글 수정</a>
+							<a href='replyDel.jsp?no=<%=no %>' class="btn primary">답글 삭제</a>
+						<%	}} else if(sid.equals(rs.getString("author"))){	%>
+							<a href='qnaModify.jsp?no=<%=no %>' class="btn primary">글 수정</a>
+							<a href='qnaDel.jsp?parno=<%=no %>' class="btn primary">글 삭제</a>
+						<%	} else {	%>
+							<p style="clear:both">글 작성자가 아닙니다.</p>
+						<%	}	%>
 					</div>             
                     </ul>
                     <% } %>
