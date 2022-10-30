@@ -216,12 +216,12 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.html" class="home">HOME</a> &gt;
-                    <span class="sel">QNA</span>
+                    <span class="sel">질문 및 답변 목록</span>
                 </div>
             </div>          
             <section class="page">
                 <div class="page_wrap">
-                    <h2 class="page_title">QNA</h2>
+                    <h2 class="page_title">질문 및 답변 목록</h2>
                     <ul class="noti_lst">
                         <li>
                             <span class="noti_num item_hd">번호</span>

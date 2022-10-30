@@ -215,12 +215,12 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.html" class="home">HOME</a> &gt;
-                    <span class="sel">FAQ</span>
+                    <span class="sel">자주하는 질문 및 답변</span>
                 </div>
             </div>          
             <section class="page">
                 <div class="page_wrap">
-                    <h2 class="page_title">FAQ</h2>
+                    <h2 class="page_title">자주하는 질문 및 답변</h2>
                     <ul class="noti_lst">
                         <li>
                             <span class="noti_num item_hd">번호</span>
@@ -257,7 +257,7 @@
 %>	                    <li>
 		                    <span class="btn_group">
 							<% if(uid.equals("keg")) { %>
-							<a href="faqWrite.jsp" class="btn primary">FAQ 등록</a>
+							<a href="faqWrite.jsp" class="btn primary">자주하는 질문 및 답변 등록</a>
 							<% } %>
 							</span>
 						</li>
