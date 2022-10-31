@@ -177,12 +177,12 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.jsp" class="home">HOME</a> &gt;
-                    <span class="sel">QNA 보기</span>
+                    <span class="sel">질문 및 답변 상세보기</span>
                 </div>
             </div>
             <section class="page">
                 <div class="page_wrap">
-                    <h2 class="page_title">QNA 글보기</h2>
+                    <h2 class="page_title">질문 및 답변 상세보기</h2>
 <%
 		sql = "select * from qnaa where no=?";
 		pstmt = con.prepareStatement(sql);

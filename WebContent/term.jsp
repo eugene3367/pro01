@@ -368,7 +368,7 @@
                         var ck_item1 = document.getElementById("ck_item1");
                         in_btn1.addEventListener("click", function () {
                             if (ck_item1.checked) {
-                                location.href = "joinForm.jsp";
+                                location.href = "join.jsp";
                             } else {
                                 alert("약관에 동의하지 않으셨습니다.");
                                 return;

@@ -8,7 +8,7 @@
 	response.setContentType("text/html; charset=UTF-8");
 	
 	//보내온 데이터 받아오기
-	int parno = Integer.parseInt(request.getParameter("no"));	
+	int parno = Integer.parseInt(request.getParameter("parno"));	
 	int cnt = 0;	
 	
 %>

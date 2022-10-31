@@ -114,7 +114,7 @@
             background-color: #fff;
             height: 25px;
             line-height: 25px;
-            width: 200px;
+            width: 315px;
             color: blue;
             font-size: 16px;
             text-indent: 0.5em;
@@ -141,23 +141,7 @@
 
         /* footer.css */
     </style>
-    <link rel="stylesheet" href="footer.css">
-    <script>
-        $(document).ready(function () {
-            $(".to_top").attr("href", location.href);
-            $(window).scroll(function () {
-                var ht = $(window).height();
-                var tp = $(this).scrollTop();
-                if (tp >= 300) {
-                    $(".to_top").addClass("on");
-                    $(".to_top").attr("href", location.href);
-                } else {
-                    $(".to_top").removeClass("on");
-                    $(".to_top").attr("href", location.href);
-                }
-            });
-        });
-    </script>
+    <link rel="stylesheet" href="footer.css">    
 </head>
 
 <body>
@@ -171,7 +155,7 @@
             </figure>
             <div class="bread">
                 <div class="bread_fr">
-                    <a href="index.html" class="home">HOME</a> &gt;
+                    <a href="index.jsp" class="home">HOME</a> &gt;
                     <span class="sel">회원정보</span>
                 </div>
             </div>

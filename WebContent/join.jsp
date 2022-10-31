@@ -68,7 +68,7 @@
         .form_fr {
             border: 2px solid rgb(76, 144, 221);
             padding: 24px;
-            width: 600px;
+            width: 760px;
             height: 300px;
             margin: 50px auto;
         }
@@ -94,7 +94,7 @@
         }
 
         .frm_tb .td {
-            width: 360px;
+            width: 560px;
         }
 
         .frm_tb .th2,
@@ -111,7 +111,7 @@
             background-color: #fff;
             height: 25px;
             line-height: 25px;
-            width: 200px;
+            width: 410px;
             color: blue;
             font-size: 16px;
             text-indent: 0.5em;
@@ -181,7 +181,7 @@
                                 <li>
                                     <div class="th"><label for="id" >아이디</label></div>
                                     <div class="td">
-                                        <input type="text" id="id" name="id" class="in_dt" style="display:block; float: left" required autofocus>
+                                        <input type="text" id="id" name="id" class="in_dt" style="display:block; float: left" placeholder="영문소문자와 숫자를 혼합하여 8글자 이상 12글자 이하" maxlength="12" pattern="[a-z0-9]{8,12}" required autofocus>
                                         <button type="button" class="in_btn" onclick="idCheck()" style="margin-left:20px">아이디 중복 확인</button>
                                         <input type="hidden" name="idck" value="no" />
                                     </div>
@@ -189,31 +189,31 @@
                                 <li>
                                     <div class="th"><label for="pw">비밀번호</label></div>
                                     <div class="td">
-                                        <input type="password" id="pw" name="pw" class="in_dt" required>
+                                        <input type="password" id="pw" name="pw" class="in_dt" placeholder="영문숫자특수문자를 혼합하여 8글자 이상" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="th"><label for="pw2">비밀번호 확인</label></div>
                                     <div class="td">
-                                        <input type="password" id="pw2" name="pw2" class="in_dt" required>
+                                        <input type="password" id="pw2" name="pw2" class="in_dt" placeholder="영문숫자특수문자를 혼합하여 8글자 이상" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="th"><label for="name">이름</label></div>
                                     <div class="td">
-                                        <input type="text" id="name" name="name" class="in_dt" required>
+                                        <input type="text" id="name" name="name" class="in_dt" placeholder="한글 이름 입력" pattern="\[^(가-힣)]\" required>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="th"><label for="email">이메일</label></div>
                                     <div class="td">
-                                        <input type="email" id="email" name="email" class="in_dt" required pattern=".@naver\.com" placeholder="naver 메일 주소 입력">
+                                        <input type="email" id="email" name="email" class="in_dt" required pattern=".+@naver\.com" placeholder="naver 메일 주소 입력">
                                     </div>
                                 </li>
                                 <li>
                                     <div class="th"><label for="tel">전화번호</label></div>
                                     <div class="td">
-                                        <input type="tel" id="tel" name="tel" class="in_dt" required>
+                                        <input type="tel" id="tel" name="tel" class="in_dt" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" placeholder="000-0000-0000" required>
                                     </div>
                                 </li>
                                 <li>

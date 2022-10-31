@@ -160,12 +160,12 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.html" class="home">HOME</a> &gt;
-                    <span class="sel">FAQ 수정하기</span>
+                    <span class="sel">자주하는 질문 및 답변 수정하기</span>
                 </div>
             </div>
             <section class="page">
                 <div class="page_wrap">
-                    <h2 class="page_title">FAQ 수정하기</h2>
+                    <h2 class="page_title">자주하는 질문 및 답변 수정하기</h2>
                     <%@ include file="connectionPool.conf" %>
                     <%
 						sql = "select * from faqa where no=?";

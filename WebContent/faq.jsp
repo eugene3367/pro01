@@ -171,7 +171,7 @@
         .btn_group {
             display: block;
             background-color: rgb(225, 222, 248);
-			width: 120px;
+			width: 280px;
             line-height: 32px;
             border-radius: 20px;
             cursor: pointer;

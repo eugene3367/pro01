@@ -274,20 +274,20 @@
 							if(rs.getString("sec").equals("Y")) {
 								if(uid.equals(rs.getString("author")) || uid.equals("keg")){
 					%>
-									<span class="noti_tit"><a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>' style="padding-left:60px;" class="sec2"><%=rs.getString("title") %></a></span>
+									<span class="noti_tit"><a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>' style="padding-left:60px;" class="sec2"><%="↪ "+rs.getString("title") %></a></span>
 					<%
 								} else {
 					%>
-									<span class="noti_tit" style="padding-left:60px;"><%=rs.getString("title") %></span>				
+									<span class="noti_tit" style="padding-left:60px;"><%="↪ "+rs.getString("title") %></span>				
 					<%
 								}		
 							} else if(rs.getString("sec").equals("N") && uid!="guest"){
 					%>
-								<span class="noti_tit"><a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>' style="padding-left:60px;"><%=rs.getString("title") %></a></span>						
+								<span class="noti_tit"><a href='qnaDetail.jsp?no=<%=rs.getInt("no") %>' style="padding-left:60px;"><%="↪ "+rs.getString("title") %></a></span>						
 					<%
 							} else {
 					%>
-						 		<span class="noti_tit" style="padding-left:60px;"><%=rs.getString("title") %></span>
+						 		<span class="noti_tit" style="padding-left:60px;"><%="↪ "+rs.getString("title") %></span>
 					<%
 							}
 						} 
@@ -312,7 +312,7 @@
 							<% if(uid!="guest") { %>
 							<a href="qnaWrite.jsp" class="btn primary">QNA 등록</a>
 							<% } else { %>
-							<p style="clear:both;">회원가입 후 로그인 하셔야 질문 및 답변을 보실 수 있습니다.</p>
+							<p style="clear:both;width: 400px;font-size: 14px;" >회원가입 후 로그인 하셔야 질문 및 답변을 보실 수 있습니다.</p>
 							<% } %>
 							</span>
 						</li>

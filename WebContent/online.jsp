@@ -101,7 +101,7 @@
         }
 
         .noti_num {
-            width: 80px;
+            width: 100px;
             text-align: center;
         }
 
@@ -114,9 +114,9 @@
         
 		#content {
     		margin-top: 20px;
-		}
+		}	
         
-        #title {        
+        #title, .in_data {        
             background-color: #fff;
             height: 25px;
             line-height: 25px;
@@ -131,7 +131,7 @@
         .btn.primary {
 		    display: block;
 		    background-color: rgb(225, 222, 248);
-		    width: 100px;
+		    width: 130px;
 		    line-height: 32px;
 		    border-radius: 20px;
 		    cursor: pointer;
@@ -186,7 +186,7 @@
 		                        <span class="noti_tit"><input type="text" name="name" id="name" class="in_data" value='<%=rs.getString("name") %>' required></span>	                      
 		                    </li>
 	                        <li>
-		                        <span class="noti_num">이메일 주소</span>
+		                        <span class="noti_num">이메일주소</span>
 		                        <span class="noti_tit"><input type="email" name="from" id="from" class="in_data" value='<%=rs.getString("email") %>' required></span>	                      
 		                    </li>   
 		                    <li>

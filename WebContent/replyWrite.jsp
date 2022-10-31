@@ -102,7 +102,7 @@
         }
 
         .noti_num {
-            width: 100px;
+            width: 110px;
             text-align: center;
         }
 
@@ -171,7 +171,7 @@
             <section class="page">
                 <div class="page_wrap">
                     <h2 class="page_title">답변 작성하기</h2>
-                    <form name="frm" action="replywritePro.jsp" method="post" class="frm">
+                    <form name="frm" action="replyWritePro.jsp" method="post" class="frm">
 	                    <ul class="noti_lst">
 	                        <li>
 		                        <span class="noti_num"><label for="title">답변 제목</label></span>

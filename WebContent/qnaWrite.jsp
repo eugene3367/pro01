@@ -101,7 +101,7 @@
         }
 
         .noti_num {
-            width: 100px;
+            width: 110px;
             text-align: center;
         }
 
@@ -164,12 +164,12 @@
             <div class="bread">
                 <div class="bread_fr">
                     <a href="index.html" class="home">HOME</a> &gt;
-                    <span class="sel">QNA 등록하기</span>
+                    <span class="sel">질문하기</span>
                 </div>
             </div>
             <section class="page">
                 <div class="page_wrap">
-                    <h2 class="page_title">QNA 등록하기</h2>
+                    <h2 class="page_title">질문하기</h2>
                     <form name="frm" action="qnaWritePro.jsp" method="post" class="frm">
 	                    <ul class="noti_lst">
 	                        <li>
@@ -182,7 +182,10 @@
 		                    </li>
 		                    <li>
 		                        <span class="noti_num"><label for="author">작성자</label></span>
-		                        <span class="noti_tit"><%=sid %><input type="hidden" name="author" id="author" class="in_data" value="<%=sid %>"></span>	                      
+		                        <span class="noti_tit">
+		                        	<input type="hidden" name="author" id="author" class="in_data" value="<%=sid %>">
+		                        	<input type="hidden" name="lev" id="lev" value="0">
+		                        </span>	                      
 		                    </li>
 		                    <li>
 		                        <span class="noti_num"><label for="author">비밀글 여부</label></span>
