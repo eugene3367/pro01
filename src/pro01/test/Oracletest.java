@@ -1,4 +1,4 @@
-package pro01test;
+package pro01.test;
 
 import java.sql.*;
 import java.util.logging.Logger;
