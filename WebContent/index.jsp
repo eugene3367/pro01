@@ -270,6 +270,7 @@
             $lst1_obj = $(".circle_lst li").clone();
             $(".circle_lst.lst2").append($lst1_obj);
         });   
+        
     </script>
 </head>
 

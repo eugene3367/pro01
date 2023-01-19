@@ -140,22 +140,7 @@
         /* footer.css */
     </style>
     <link rel="stylesheet" href="footer.css">
-    <script>
-        $(document).ready(function () {
-            $(".to_top").attr("href", location.href);
-            $(window).scroll(function () {
-                var ht = $(window).height();
-                var tp = $(this).scrollTop();
-                if (tp >= 300) {
-                    $(".to_top").addClass("on");
-                    $(".to_top").attr("href", location.href);
-                } else {
-                    $(".to_top").removeClass("on");
-                    $(".to_top").attr("href", location.href);
-                }
-            });
-        });
-    </script>
+
 </head>
 
 <body>
